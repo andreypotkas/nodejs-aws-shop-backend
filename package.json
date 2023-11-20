@@ -21,7 +21,8 @@
   "dependencies": {
     "@aws-cdk/aws-apigatewayv2-alpha": "^2.110.0-alpha.0",
     "@aws-cdk/aws-apigatewayv2-integrations-alpha": "^2.110.0-alpha.0",
-    "aws-cdk-lib": "^2.110.0"
+    "aws-cdk-lib": "^2.110.0",
+    "typescript": "^5.3.2"
   },
   "devDependencies": {
     "esbuild": "^0.19.5",
