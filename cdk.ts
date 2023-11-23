@@ -4,12 +4,9 @@ import {
   NodejsFunctionProps,
 } from "aws-cdk-lib/aws-lambda-nodejs";
 import * as lambda from "aws-cdk-lib/aws-lambda";
+import dotenv from "dotenv";
 
-import {
-  CorsHttpMethod,
-  HttpApi,
-  HttpMethod,
-} from "@aws-cdk/aws-apigatewayv2-alpha";
+import { HttpApi, HttpMethod } from "@aws-cdk/aws-apigatewayv2-alpha";
 import { HttpLambdaIntegration } from "@aws-cdk/aws-apigatewayv2-integrations-alpha";
 
 const app = new cdk.App();
@@ -37,6 +34,12 @@ const getProductById = new NodejsFunction(stack, "GetProductByIdLambda", {
   entry: "src/lambdas/getProductById/getProductById.ts",
 });
 
+const createProduct = new NodejsFunction(stack, "CreateProductLambda", {
+  ...sharedlambdaProps,
+  functionName: "createProduct",
+  entry: "src/lambdas/createProduct/createProduct.ts",
+});
+
 const api = new HttpApi(stack, "ProductApi", {
   corsPreflight: {
     allowHeaders: ["*"],
@@ -46,7 +49,7 @@ const api = new HttpApi(stack, "ProductApi", {
 
 api.addRoutes({
   integration: new HttpLambdaIntegration(
-    "GetProductListIntegration",
+    "GetProductsListIntegration",
     getProductList
   ),
   path: "/products",
@@ -60,4 +63,13 @@ api.addRoutes({
   ),
   path: "/products/{id}",
   methods: [HttpMethod.GET],
+});
+
+api.addRoutes({
+  integration: new HttpLambdaIntegration(
+    "CreateProductIntegration",
+    createProduct
+  ),
+  path: "/products",
+  methods: [HttpMethod.POST],
 });
