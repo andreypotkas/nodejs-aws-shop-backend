@@ -12,8 +12,6 @@ export const handler = async (event: LambdaEvent) => {
       TableName: "Products",
     };
 
-    console.log(dynamoDb);
-
     const productResult = await dynamoDb.scan(params).promise();
     const products = productResult.Items ?? [];
 
@@ -37,7 +35,7 @@ export const handler = async (event: LambdaEvent) => {
       })
     );
 
-    return LambdaUtils.buildResponse(200, { productListWithStock });
+    return LambdaUtils.buildResponse(200, productListWithStock);
   } catch (err: unknown) {
     const error = err as Error;
     console.error("Error:", error.message);
