@@ -1,0 +1,91 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Product API
+servers:
+  - url: https://3coawsqalb.execute-api.eu-west-1.amazonaws.com/
+paths:
+  /products:
+    get:
+      summary: Get Product List
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  name: Product 1
+                  description: Description for Product 1
+                - id: 2
+                  name: Product 2
+                  description: Description for Product 2
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: Internal Server Error
+    post:
+      summary: Create a new product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              title: New Product
+              description: Description for New Product
+              price: 29.99
+              count: 50
+      responses:
+        "201":
+          description: Product created successfully
+          content:
+            application/json:
+              example:
+                message: Product created successfully
+                productId: 3
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                message: Title and price are required fields.
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: Internal Server Error
+
+  /products/{id}:
+    get:
+      summary: Get Product by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the product
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                name: Product 1
+                description: Description for Product 1
+        "404":
+          description: Product Not Found
+          content:
+            application/json:
+              example:
+                message: There is no such product.
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: Internal Server Error

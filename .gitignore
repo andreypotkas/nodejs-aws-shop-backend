@@ -1,4 +1,5 @@
-node_modules
-cdk.out
-
+productService/node_modules
+productService/cdk.out
+importService/node_modules
+importService/cdk.out
 .env
