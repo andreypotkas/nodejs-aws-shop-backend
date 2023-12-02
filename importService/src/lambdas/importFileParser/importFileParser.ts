@@ -1,7 +1,7 @@
 import { LambdaUtils } from "@/utils/lambda.utils";
 import { S3Event } from "@/types/s3event.type";
 import * as stream from "stream";
-import * as csvParser from "csv-parser";
+import csvParser from "csv-parser";
 import * as AWS from "aws-sdk";
 
 const s3 = new AWS.S3();

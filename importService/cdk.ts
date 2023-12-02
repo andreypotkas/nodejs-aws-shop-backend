@@ -6,7 +6,7 @@ import {
 import * as lambda from "aws-cdk-lib/aws-lambda";
 import * as s3 from "aws-cdk-lib/aws-s3";
 import * as s3notifications from "aws-cdk-lib/aws-s3-notifications";
-import { HttpApi } from "@aws-cdk/aws-apigatewayv2-alpha";
+import { CorsHttpMethod, HttpApi } from "@aws-cdk/aws-apigatewayv2-alpha";
 import { HttpLambdaIntegration } from "@aws-cdk/aws-apigatewayv2-integrations-alpha";
 import { HttpMethod } from "aws-cdk-lib/aws-events";
 
@@ -55,6 +55,7 @@ const api = new HttpApi(stack, "ImportApi", {
   corsPreflight: {
     allowHeaders: ["*"],
     allowOrigins: ["*"],
+    allowMethods: [CorsHttpMethod.ANY],
   },
 });
 
