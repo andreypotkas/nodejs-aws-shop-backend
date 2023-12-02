@@ -27,12 +27,7 @@ export const handler = async (event: LambdaEvent) => {
     };
     const signedUrl = await s3.getSignedUrlPromise("putObject", params);
 
-    const response = {
-      statusCode: 200,
-      body: JSON.stringify({ signedUrl }),
-    };
-
-    return LambdaUtils.buildResponse(200, response);
+    return LambdaUtils.buildResponse(200, signedUrl);
   } catch (err: unknown) {
     const error = err as Error;
     console.error("Error:", error.message);

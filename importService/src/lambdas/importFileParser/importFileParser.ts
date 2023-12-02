@@ -33,10 +33,8 @@ export const handler = async (event: S3Event) => {
         console.log("CSV parsing completed.");
       });
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: "File processing initiated" }),
-    };
+    const response = { message: "File processing initiated" };
+    return LambdaUtils.buildResponse(200, response);
   } catch (err: unknown) {
     const error = err as Error;
     console.error("Error:", error.message);
