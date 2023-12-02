@@ -51,7 +51,7 @@ bucket.addEventNotification(
   new s3notifications.LambdaDestination(importFileParser)
 );
 
-const api = new HttpApi(stack, "ProductApi", {
+const api = new HttpApi(stack, "ImportApi", {
   corsPreflight: {
     allowHeaders: ["*"],
     allowOrigins: ["*"],
