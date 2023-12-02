@@ -26,8 +26,37 @@ paths:
             application/json:
               example:
                 message: Internal Server Error
-    tags:
-      - Products
+    post:
+      summary: Create a new product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              title: New Product
+              description: Description for New Product
+              price: 29.99
+              count: 50
+      responses:
+        "201":
+          description: Product created successfully
+          content:
+            application/json:
+              example:
+                message: Product created successfully
+                productId: 3
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                message: Title and price are required fields.
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                message: Internal Server Error
 
   /products/{id}:
     get:
@@ -60,5 +89,3 @@ paths:
             application/json:
               example:
                 message: Internal Server Error
-    tags:
-      - Products
